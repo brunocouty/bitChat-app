@@ -1,7 +1,7 @@
 import {Component, NgZone} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
-declare let io;
+declare let io, moment;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -10,7 +10,9 @@ export class HomePage {
 
   user = {
     message: '',
-    name: ''
+    name: '',
+    date: '',
+    time: ''
   };
   socket: any;
   zone: any;
@@ -20,6 +22,7 @@ export class HomePage {
     data: {},
     destination: 'abc'
   };
+  date_controller = '';
 
   static get parameters() {
     return [NgZone];
@@ -31,6 +34,8 @@ export class HomePage {
     this.socket.on(this.pkg.destination + 'message', (msg) => {
       this.zone.run(() => {
         console.log(msg);
+        // this.date_controller = moment().format('DD/MMM/YY');
+        this.date_controller = moment().format('07/Jun/06');
         this.chats.push(msg);
       });
     });
@@ -51,10 +56,14 @@ export class HomePage {
   sendMessage() {
     if (this.user.message != '') {
       this.pkg.data = this.user;
+      let date = moment().format('DD/MMM/YY');
+      let time = moment().format('HH:mm');
+      this.user.date = date;
+      this.user.time = time;
       console.log('send', this.pkg);
       this.socket.emit('message', this.pkg);
     }
-    // this.user.message = '';
+    this.user.message = '';
   }
 
   ionViewWillLeave() {

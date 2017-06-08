@@ -1,33 +1,40 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      bitChat
-    </ion-title>
-  </ion-navbar>
-  <ion-toolbar>
+  <ion-toolbar mode="ios">
+    <ion-buttons left>
+      <button ion-button>
+        <i class="fa fa-chevron-left"></i>
+      </button>
+    </ion-buttons>
     <ion-input [(ngModel)]="user.name" text-wrap placeholder="username"></ion-input>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let item of chats">
-      <div style="float: right;" *ngIf="item.name == user.name">
-        {{item.message}}
-      </div>
-      <div style="float: left;" *ngIf="item.name != user.name">
-        {{item.message}}
-      </div>
-    </ion-item>
-  </ion-list>
+  <div *ngFor="let item of chats" text-wrap>
+    <div *ngIf="date_controller != item.date" class="text-center">
+      <span class="date-separator bg-info text-info">{{item.date}}</span>
+      <br clear="all" />
+    </div>
+    <p class="message pull-right" *ngIf="item.name == user.name">
+      {{item.message}}
+      <br />
+      <small class="pull-right text-success">{{item.time}}</small>
+    </p>
+    <p class="message pull-left" *ngIf="item.name != user.name">
+      {{item.message}}
+      <br />
+      <small class="pull-right text-warning">{{item.time}}</small>
+    </p>
+    <br clear="all" />
+  </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-input [(ngModel)]="user.message" text-wrap></ion-input>
+    <ion-input [(ngModel)]="user.message" text-wrap placeholder="digite sua mensagem..."></ion-input>
     <ion-buttons right>
-      <button ion-button (click)="sendMessage()">
-        <ion-icon name="send"></ion-icon>
+      <button (click)="sendMessage()" class="btn btn-success btn-rounded">
+        <i class="fa fa-paper-plane-o"></i>
       </button>
     </ion-buttons>
   </ion-toolbar>

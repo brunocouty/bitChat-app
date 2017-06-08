@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-toolbar mode="ios">
+    <ion-title class="text-center">
+      Registro e Login
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <p class="text-center">
+    Por favor, informe seu nome e número de celular.
+  </p>
+
+  <ion-list>
+    <ion-item>
+      <ion-input class="text-center" placeholder="Seu nome" type="tel" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input class="text-center phone" placeholder="+55 11 9 9123-4567" type="tel" [(ngModel)]="user.phone"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button class="btn btn-block btn-info" (click)="access()">
+    <i class="fa fa-check-circle"></i>
+    ACESSAR
+  </button>
+
+</ion-content>
