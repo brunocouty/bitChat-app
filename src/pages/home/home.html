@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      bitChat
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-input [(ngModel)]="user.name" text-wrap placeholder="username"></ion-input>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let item of chats">
+      <div style="float: right;" *ngIf="item.name == user.name">
+        {{item.message}}
+      </div>
+      <div style="float: left;" *ngIf="item.name != user.name">
+        {{item.message}}
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-input [(ngModel)]="user.message" text-wrap></ion-input>
+    <ion-buttons right>
+      <button ion-button (click)="sendMessage()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
